@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  streamlit:
+    build:
+      context: .
+    environment:
+      LOGIN: ""
+      PASSWORD: ""
+      HOST: ""
+      PORT: ""
+      DATABASE: ""
+    ports:
+      - 8501:8501
+    volumes:
+      - ./app:/app
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
